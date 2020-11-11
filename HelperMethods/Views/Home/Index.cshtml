@@ -1,0 +1,34 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <div>
+            Fruit:
+            @foreach (string str in ViewBag.Fruit)
+            {
+                <b>@str</b>
+            }
+        </div>
+        <div>
+            Cities:
+            @foreach (string str in ViewBag.Cities)
+            {
+                <b>@str</b>
+            }
+        </div>
+        <div>My model message is @Model</div>
+    </div>
+</body>
+</html>
