@@ -5,6 +5,14 @@
     Layout = null;
 }
 
+
+@helper ListArrayItems(string[] items)
+    {
+foreach(string i in items)
+{
+        <b>@i</b>
+}
+    }
 <!DOCTYPE html>
 
 <html>
@@ -13,20 +21,33 @@
     <title></title>
 </head>
 <body>
+    @*<div>
+            <div>
+                Fruit:
+                @foreach (string str in ViewBag.Fruit)
+                {
+                    <b>@str</b>
+                }
+            </div>
+            <div>
+                Cities:
+                @foreach (string str in ViewBag.Cities)
+                {
+                    <b>@str</b>
+                }
+            </div>
+
+            <div>My model message is @Model</div>
+        </div>*@
+
     <div>
         <div>
-            Fruit:
-            @foreach (string str in ViewBag.Fruit)
-            {
-                <b>@str</b>
-            }
+            Fruit: @ListArrayItems(ViewBag.Fruit)
+       
         </div>
         <div>
-            Cities:
-            @foreach (string str in ViewBag.Cities)
-            {
-                <b>@str</b>
-            }
+            Cities:  @ListArrayItems(ViewBag.Cities)
+
         </div>
 
         <div>My model message is @Model</div>
