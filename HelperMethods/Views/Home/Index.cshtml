@@ -1,4 +1,5 @@
 ﻿@model string
+@using HelperMethods.Infrastructure
 
 @{
     ViewBag.Title = "Index";
@@ -40,13 +41,32 @@ foreach(string i in items)
             <div>My model message is @Model</div>
         </div>*@
 
-    <div>
+
+    @*using inline helper method!*@
+    @*<div>
         <div>
             Fruit: @ListArrayItems(ViewBag.Fruit)
-       
+
         </div>
         <div>
             Cities:  @ListArrayItems(ViewBag.Cities)
+
+        </div>
+
+        <div>My model message is @Model</div>
+    </div>*@
+
+
+    @*using external helper method!*@
+    <div>
+        <div>
+            @*@Html  gets htmlhelper method to render html elements*@
+            @*cast needed from dynamic type to the one defined in the helper method*@
+            Fruit: @Html.ListArrayItems((string[]) ViewBag.Fruit)
+
+        </div>
+        <div>
+            Cities:  @Html.ListArrayItems((string[])  ViewBag.Cities)
 
         </div>
 
