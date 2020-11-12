@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 
 namespace HelperMethods.Infrastructure
 {
@@ -15,6 +16,21 @@ namespace HelperMethods.Infrastructure
             }
 
             return new MvcHtmlString(tag.ToString());
+        }
+
+
+        //My model message is This is my html element<input> - msg returned by helper is enoded
+        public static string DisplayMessage(this HtmlHelper html, string msg)
+        {
+            return String.Format("This is the message <p>{0}</p>", msg);
+        }
+
+        public static MvcHtmlString DisplayMessageEncoded(this HtmlHelper html, string msg)
+        {
+            //selectively encoded msg
+            string encodedMessage = html.Encode(msg);
+            string result = String.Format("This is the message <p>{0}</p>", encodedMessage);
+            return new MvcHtmlString(result);
         }
     }
 }

@@ -62,15 +62,19 @@ foreach(string i in items)
         <div>
             @*@Html  gets htmlhelper method to render html elements*@
             @*cast needed from dynamic type to the one defined in the helper method*@
-            Fruit: @Html.ListArrayItems((string[]) ViewBag.Fruit)
+            Fruit: @Html.ListArrayItems((string[])ViewBag.Fruit)
 
         </div>
         <div>
-            Cities:  @Html.ListArrayItems((string[])  ViewBag.Cities)
+            Cities:  @Html.ListArrayItems((string[])ViewBag.Cities)
 
         </div>
 
         <div>My model message is @Model</div>
+
+        <div>My encoded helper message is @Html.DisplayMessage(Model)</div>
+
+        <div>My selectively encoded message is @Html.DisplayMessageEncoded(Model)</div>
     </div>
 </body>
 </html>
