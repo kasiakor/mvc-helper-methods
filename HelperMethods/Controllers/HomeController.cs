@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using HelperMethods.Models;
 
 namespace HelperMethods.Controllers
 {
@@ -15,6 +12,19 @@ namespace HelperMethods.Controllers
             ViewBag.Cities = new string[] { "Berlin", "Vienna", "Innsbruck" };
             string message = "This is my html element <input>";
             return View((object)message);
+        }
+
+        //renders the form
+        public ActionResult CreatePerson()
+        {
+            return View(new Person());
+        }
+
+        //data from the form redisplayed to the user
+        [HttpPost]
+        public ActionResult CreatePerson(Person person)
+        {
+            return View(person);
         }
     }
 }

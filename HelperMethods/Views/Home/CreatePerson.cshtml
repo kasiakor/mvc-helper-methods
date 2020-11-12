@@ -1,0 +1,25 @@
+﻿@model  HelperMethods.Models.Person
+
+@{
+    ViewBag.Title = "CreatePerson";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h2>Create Person Form</h2>
+@*name attr is use for model binding, input elements contain values for the model type properties*@
+    <form action="" method="post">
+
+        <div class="dataElem">
+            <label>PersonId</label>
+            <input name="personId" value="@Model.PersonId" />
+        </div>
+        <div class="dataElem">
+            <label>FirstName</label>
+            <input name="firstName" value="@Model.FirstName" />
+        </div>
+        <div class="dataElem">
+            <label>LastName</label>
+            <input name="lastName" value="@Model.LastName" />
+        </div>
+        <input type="submit" value="Submit" />
+    </form>
