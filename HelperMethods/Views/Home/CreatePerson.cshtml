@@ -30,7 +30,9 @@
         <div class="dataElem">
             <label>FirstName</label>
             @*<input name="firstName" value="@Model.FirstName" />*@
-            @Html.TextBox("firstName", @Model.FirstName)
+
+            @*strongly typed input helpers, vmo is passed, its property is used to set the value attribute*@
+            @Html.TextBoxFor(m => m.FirstName)
         </div>
         <div class="dataElem">
             <label>LastName</label>
