@@ -5,8 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <h2>Create Person Form</h2>
+
+
+    < h2 > Create Person Form</h2>
 @*name attr is use for model binding, input elements contain values for the model type properties*@
+
+@*BeginForm helper method, controller, action, id for routing, form method, element attributes*@
+@using (Html.BeginForm("CreatePerson", "Home", new { id = "MyIdValue"}, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
+{
     <form action="" method="post">
 
         <div class="dataElem">
@@ -23,3 +29,4 @@
         </div>
         <input type="submit" value="Submit" />
     </form>
+}
