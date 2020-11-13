@@ -11,7 +11,10 @@
 @*name attr is use for model binding, input elements contain values for the model type properties*@
 
 @*BeginForm helper method, controller, action, id for routing, form method, element attributes*@
-@using (Html.BeginForm("CreatePerson", "Home", new { id = "MyIdValue"}, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
+@*@using (Html.BeginForm("CreatePerson", "Home", new { id = "MyIdValue" }, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))*@
+
+@*action = "app/forms/Home/CreatePerson"*@
+@using (Html.BeginRouteForm("RouteForm", FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
 {
     <form action="" method="post">
 
