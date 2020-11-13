@@ -7,29 +7,59 @@
 
 
 
-    < h2 > Create Person Form</h2>
+<h2> Create Person Form</h2>
 @*name attr is use for model binding, input elements contain values for the model type properties*@
 
 @*BeginForm helper method, controller, action, id for routing, form method, element attributes*@
-@*@using (Html.BeginForm("CreatePerson", "Home", new { id = "MyIdValue" }, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))*@
 
 @*action = "app/forms/Home/CreatePerson"*@
-@using (Html.BeginRouteForm("RouteForm", FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
+@*@using (Html.BeginRouteForm("RouteForm", FormMethod.Post, new { @class = "personClass", data_formType = "person" }))*@
+@using (Html.BeginForm("CreatePerson", "Home", new { id = "MyIdValue" }, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
+
 {
     <form action="" method="post">
 
         <div class="dataElem">
             <label>PersonId</label>
-            <input name="personId" value="@Model.PersonId" />
+            @*<input name="personId" value="@Model.PersonId" /> must match form value and model value *@
+            @*@Html.TextBox("personId", @Model.PersonId)*@
+
+            @*mvc fr searches for ViewBag.PersonId or @Model.PersonId to create input element*@ 
+            @Html.TextBox("personId")
         </div>
         <div class="dataElem">
             <label>FirstName</label>
-            <input name="firstName" value="@Model.FirstName" />
+            @*<input name="firstName" value="@Model.FirstName" />*@
+            @Html.TextBox("firstName", @Model.FirstName)
         </div>
         <div class="dataElem">
             <label>LastName</label>
-            <input name="lastName" value="@Model.LastName" />
+            @*<input name="lastName" value="@Model.LastName" />*@
+            @Html.TextBox("lastName", @Model.LastName)
         </div>
         <input type="submit" value="Submit" />
     </form>
 }
+
+
+@*<form action="/Home/CreatePerson/MyIdValue" class="personClass" data-formType="person" method="post">
+    <form action="" method="post">
+
+        <div class="dataElem">
+            <label>PersonId</label>
+
+            <input data-val="true" data-val-number="The field PersonId must be a number." data-val-required="The PersonId field is required." id="personId" name="personId" type="text" value="0" />
+        </div>
+        <div class="dataElem">
+            <label>FirstName</label>
+
+            <input id="firstName" name="firstName" type="text" value="" />
+        </div>
+        <div class="dataElem">
+            <label>LastName</label>
+
+            <input id="lastName" name="lastName" type="text" value="" />
+        </div>
+        <input type="submit" value="Submit" />
+    </form>
+</form>*@
