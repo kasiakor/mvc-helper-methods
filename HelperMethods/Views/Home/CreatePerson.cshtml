@@ -17,30 +17,38 @@
 @using (Html.BeginForm("CreatePerson", "Home", new { id = "MyIdValue" }, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
 
 {
-    <form action="" method="post">
+<form action="" method="post">
 
-        <div class="dataElem">
-            <label>PersonId</label>
-            @*<input name="personId" value="@Model.PersonId" /> must match form value and model value *@
-            @*@Html.TextBox("personId", @Model.PersonId)*@
+    <div class="dataElem">
+        <label>PersonId</label>
+        @*<input name="personId" value="@Model.PersonId" /> must match form value and model value *@
+        @*@Html.TextBox("personId", @Model.PersonId)*@
 
-            @*mvc fr searches for ViewBag.PersonId or @Model.PersonId to create input element*@ 
-            @Html.TextBox("personId")
-        </div>
-        <div class="dataElem">
-            <label>FirstName</label>
-            @*<input name="firstName" value="@Model.FirstName" />*@
+        @*mvc fr searches for ViewBag.PersonId or @Model.PersonId to create input element*@
+        @Html.TextBox("personId")
+    </div>
+    <div class="dataElem">
+        <label>FirstName</label>
+        @*<input name="firstName" value="@Model.FirstName" />*@
 
-            @*strongly typed input helpers, vmo is passed, its property is used to set the value attribute*@
-            @Html.TextBoxFor(m => m.FirstName)
-        </div>
-        <div class="dataElem">
-            <label>LastName</label>
-            @*<input name="lastName" value="@Model.LastName" />*@
-            @Html.TextBox("lastName", @Model.LastName)
-        </div>
-        <input type="submit" value="Submit" />
-    </form>
+        @*strongly typed input helpers, vmo is passed, its property is used to set the value attribute*@
+        @Html.TextBoxFor(m => m.FirstName)
+    </div>
+    <div class="dataElem">
+        <label>LastName</label>
+        @*<input name="lastName" value="@Model.LastName" />*@
+        @Html.TextBox("lastName", @Model.LastName)
+    </div>
+    <div class="dataElem">
+        <label>Role</label>
+        @*<select data-val="true" data-val-required="The Role field is required." id="Role" name="Role"><option selected="selected">Admin</option>
+        <option>User</option>
+        <option>Guest</option>
+        </select>*@
+        @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetNames(typeof(HelperMethods.Models.Role))))
+    </div>
+    <input type="submit" value="Submit" />
+</form>
 }
 
 
