@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "CreatePerson";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    //helper methods add data attributes to html elements to support validation
+    Html.EnableClientValidation(false);
+    //Result<div class="dataElem"><label>PersonId</label><input id="personId" name="personId" type="text" value="0" /></div>
 }
 
 
