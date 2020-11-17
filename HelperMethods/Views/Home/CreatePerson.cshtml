@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "CreatePerson";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
     //helper methods add data attributes to html elements to support validation
     Html.EnableClientValidation(false);
     //Result<div class="dataElem"><label>PersonId</label><input id="personId" name="personId" type="text" value="0" /></div>
@@ -28,7 +29,8 @@
         @*@Html.TextBox("personId", @Model.PersonId)*@
 
         @*mvc fr searches for ViewBag.PersonId or @Model.PersonId to create input element*@
-        @Html.TextBox("personId")
+        @*@Html.TextBox("personId")*@
+        @Html.EditorFor(m => m.PersonId)
     </div>
     <div class="dataElem">
         <label>FirstName</label>
@@ -42,12 +44,18 @@
         @*<input name="lastName" value="@Model.LastName" />*@
         @Html.TextBox("lastName", @Model.LastName)
     </div>
+
+    <div class="dataElem">
+        <label>Editor for BirthDay Date</label>
+        @*@Html.Editor("Birthday")*@
+        @Html.EditorFor(m => m.Birthday)
+    </div>
     <div class="dataElem">
         <label>Role</label>
         @*<select data-val="true" data-val-required="The Role field is required." id="Role" name="Role"><option selected="selected">Admin</option>
-        <option>User</option>
-        <option>Guest</option>
-        </select>*@
+            <option>User</option>
+            <option>Guest</option>
+            </select>*@
         @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetNames(typeof(HelperMethods.Models.Role))))
     </div>
     <input type="submit" value="Submit" />
