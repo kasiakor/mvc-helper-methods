@@ -1,0 +1,19 @@
+﻿@model  HelperMethods.Models.Person
+
+@{
+    ViewBag.Title = "CreatePerson";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<h2>Create Person with Address Object: @Html.LabelForModel()</h2>
+@using (Html.BeginForm("FormRoute", "Home", new { id = "MyIdValue" }, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
+
+{
+    <div class="column">
+        @Html.EditorForModel()
+    </div>
+    <div class="column">
+        @Html.EditorFor(m => m.HomeAddress)
+    </div>
+    <input type="submit" value="Submit" />
+}

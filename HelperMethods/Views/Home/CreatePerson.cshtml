@@ -21,7 +21,6 @@
 @using (Html.BeginForm("CreatePerson", "Home", new { id = "MyIdValue" }, FormMethod.Post, new { @class = "personClass", data_formType = "person" }))
 
 {
-<form action="" method="post">
 
     <div class="dataElem">
         @Html.LabelFor(m => m.PersonId)
@@ -66,7 +65,6 @@
         @Html.DisplayForModel()
     </fieldset>
     <input type="submit" value="Submit" />
-</form>
 }
 
 
