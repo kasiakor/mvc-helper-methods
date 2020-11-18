@@ -34,7 +34,7 @@ namespace HelperMethods.Controllers
 
         //data from the form redisplayed to the user
         [HttpPost]
-        public ActionResult CreatePersonAddresObject(Person person)
+        public ActionResult CreatePersonAddressObject(Person person)
         {
             return View("DisplayPerson", person);
         }
