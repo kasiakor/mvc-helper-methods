@@ -5,18 +5,17 @@ using System.Web.Mvc;
 
 namespace HelperMethods.Models
 {
-    public class Person
+    [MetadataType(typeof(PersonMetaData))]
+    public partial class Person
     {
-        [DisplayName("New Person")]
+        //[DisplayName("New Person")]
         //[HiddenInput]
-        [HiddenInput(DisplayValue = false)]
+        //[HiddenInput(DisplayValue = false
+        //[Display(Name = "Nickname")]
+        //[DataType(DataType.Date)]
         public int PersonId { get; set; }
-
-        [Display(Name = "Nickname")]
         public string FirstName { get; set; }
-        public string LastName { get; set; }
-
-        [DataType(DataType.Date)]
+        public string LastName { get; set; } 
         public DateTime Birthday { get; set; }
         public Address HomeAddress { get; set; }
         public bool isApproved { get; set; }
