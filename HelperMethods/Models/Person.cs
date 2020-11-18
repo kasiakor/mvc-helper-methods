@@ -1,15 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace HelperMethods.Models
 {
     public class Person
     {
-        public int  PersonId { get; set; }
+        [DisplayName("New Person")]
+        //[HiddenInput]
+        [HiddenInput(DisplayValue = false)]
+        public int PersonId { get; set; }
+
+        [Display(Name = "Nickname")]
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime Birthday { get; set; }
         public Address HomeAddress { get; set; }
         public bool isApproved { get; set; }

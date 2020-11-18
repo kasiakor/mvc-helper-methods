@@ -11,7 +11,7 @@
 
 
 
-<h2> Create Person Form</h2>
+<h2> Create Person Form :  @Html.LabelForModel()</h2>
 @*name attr is use for model binding, input elements contain values for the model type properties*@
 
 @*BeginForm helper method, controller, action, id for routing, form method, element attributes*@
@@ -24,7 +24,7 @@
 <form action="" method="post">
 
     <div class="dataElem">
-        <label>PersonId</label>
+        @Html.LabelFor(m => m.PersonId)
         @*<input name="personId" value="@Model.PersonId" /> must match form value and model value *@
         @*@Html.TextBox("personId", @Model.PersonId)*@
 
@@ -58,9 +58,18 @@
             </select>*@
         @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetNames(typeof(HelperMethods.Models.Role))))
     </div>
+
+    @* alternative *@
+
+    <fieldset>
+        @Html.LabelForModel()
+        @Html.DisplayForModel()
+    </fieldset>
     <input type="submit" value="Submit" />
 </form>
 }
+
+
 
 
 @*<form action="/Home/CreatePerson/MyIdValue" class="personClass" data-formType="person" method="post">
