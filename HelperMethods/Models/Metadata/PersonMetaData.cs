@@ -27,5 +27,9 @@ namespace HelperMethods.Models
 
         [Display(Name = "Approved")]
         public bool isApproved { get; set; }
+
+        //generic custom template for all enumerations
+        [UIHint("Enum")]
+        public Role Role { get; set; }
     }
 }
