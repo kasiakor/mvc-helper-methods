@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Person>
+@using HelperMethods.Models
+
+@{
+    ViewBag.Title = "GetPeople";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>A synchronous form</title>
+</head>
+<body>
+    <h2>A synchronous form</h2>
+    <table>
+        <thead><tr><th>First</th><th>Last</th><th>Role</th></tr></thead>
+        <tbody>
+
+            @foreach (Person p in Model)
+            {
+                <tr>
+                    <td>@p.FirstName</td>
+                    <td>@p.LastName</td>
+                    <td>@p.Role</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.DropDownList("selectedRole", new SelectList (
+           new [] {"All"}.Concat(Enum.GetNames(typeof(Role)))
+           ))
+            <button type="submit">Submit</button>
+        </div>
+    }
+    <div>
+
+    </div>
+</body>
+</html>
