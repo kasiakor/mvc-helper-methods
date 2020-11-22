@@ -1,5 +1,6 @@
 ﻿using HelperMethods.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -21,24 +22,43 @@ namespace HelperMethods.Controllers
             return View();
         }
 
-        public ActionResult GetPeople()
-        {
-            return View(personData);
-        }
+        //a synchronous form
+        //public ActionResult GetPeople()
+        //{
+        //    return View(personData);
+        //}
 
-        [HttpPost]
-        public ActionResult GetPeople(string selectedRole)
-        {
+        //[HttpPost]
+        //public ActionResult GetPeople(string selectedRole)
+        //{
 
-            if (selectedRole == null || selectedRole == "All")
-            {
-                return View(personData);
-            }
-            else
+        //    if (selectedRole == null || selectedRole == "All")
+        //    {
+        //        return View(personData);
+        //    }
+        //    else
+        //    {
+        //        Role selected = (Role)Enum.Parse(typeof(Role), selectedRole);
+        //        return View(personData.Where(p =>p.Role == selected));
+        //    }
+        //}
+
+
+        public PartialViewResult GetPeopleData(string selectedRole = "All")
+        {
+            IEnumerable<Person> data = personData;
+            if(selectedRole != "All")
             {
                 Role selected = (Role)Enum.Parse(typeof(Role), selectedRole);
-                return View(personData.Where(p =>p.Role == selected));
+                data = personData.Where(p => p.Role == selected);
             }
+            return PartialView(data);
+        }
+
+        // passes selected value as a string to the view
+        public ActionResult GetPeople(string selectedRole = "All")
+        {
+            return View((object)selectedRole);
         }
     }
 }
