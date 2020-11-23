@@ -7,6 +7,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     AjaxOptions ajaxOptions = new AjaxOptions
     {
+        Confirm = "Do we proceed?",
+        LoadingElementId = "loading",
+        LoadingElementDuration = 5000,
+        //Url ="https://thedogsalon.com/",
+        Url = Url.Action("GetPeopleData"),
         UpdateTargetId = "tableBody"
     };
 }
@@ -21,7 +26,10 @@
 </head>
 <body>
     @*<h2>A synchronous form</h2>*@
-    <h2>Ajax form</h2>
+    <h2 id="ajax_form">Ajax form</h2>
+    <div id="loading" style="display:none">
+        <p>Loading data....</p>
+    </div>  
     <table>
         <thead><tr><th>First</th><th>Last</th><th>Role</th></tr></thead>
         <tbody id="tableBody">
@@ -52,3 +60,5 @@
 
 </body>
 </html>
+
+@*<form action="/People/GetPeopleData" data-ajax="true" data-ajax-confirm="Do we proceed?" data-ajax-loading="#ajax_form" data-ajax-loading-duration="5000" data-ajax-mode="replace" data-ajax-update="#tableBody" data-ajax-url="https://thedogsalon.com/" id="form0" method="post">*@
