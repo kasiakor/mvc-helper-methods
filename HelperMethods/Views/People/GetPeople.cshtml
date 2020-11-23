@@ -1,9 +1,14 @@
-﻿@model IEnumerable<Person>
+﻿@*@model IEnumerable<Person>*@
 @using HelperMethods.Models
+@model string 
 
 @{
     ViewBag.Title = "GetPeople";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        UpdateTargetId = "tableBody"
+    };
 }
 
 <!DOCTYPE html>
@@ -12,7 +17,6 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     @*<title>A synchronous form</title>*@
-    *
     <title>Ajax form</title>
 </head>
 <body>
@@ -20,7 +24,7 @@
     <h2>Ajax form</h2>
     <table>
         <thead><tr><th>First</th><th>Last</th><th>Role</th></tr></thead>
-        <tbody>
+        <tbody id="tableBody">
             @*Partial view rendered here GetPeopleData*@
             @Html.Action("GetPeopleData", new { selectedRole = Model })
 
@@ -35,17 +39,16 @@
         </tbody>
     </table>
 
-    @using (Html.BeginForm())
+    @*@using (Html.BeginForm())*@
+    @using (Ajax.BeginForm("GetPeopleData", ajaxOptions))
     {
         <div>
             @Html.DropDownList("selectedRole", new SelectList(
-           new[] { "All" }.Concat(Enum.GetNames(typeof(Role)))
-           ))
+            new[] { "All" }.Concat(Enum.GetNames(typeof(Role)))
+            ))
             <button type="submit">Submit</button>
         </div>
     }
-    <div>
 
-    </div>
 </body>
 </html>
