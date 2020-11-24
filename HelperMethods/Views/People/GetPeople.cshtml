@@ -7,29 +7,47 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     AjaxOptions ajaxOptions = new AjaxOptions
     {
-        Confirm = "Do we proceed?",
-        LoadingElementId = "loading",
-        LoadingElementDuration = 5000,
+        //Confirm = "Do we proceed?",
+        //LoadingElementId = "loading",
+        //LoadingElementDuration = 5000,
         //Url ="https://thedogsalon.com/",
         Url = Url.Action("GetPeopleData"),
-        UpdateTargetId = "tableBody"
+        UpdateTargetId = "tableBody",
+        OnSuccess = "RowsCount"
     };
 }
 
-<!DOCTYPE html>
+    <script  type="text/javascript">
+        function OnBegin() {
+            alert("OnBegin function is called");
+        }
+         function OnFailure(error) {
+            alert("OnFailure function is called" + error);
+        }
+         function OnSuccess(data) {
+            alert("OnSuccess function is called" + data);
+        }
+         function OnComplete(status) {
+            alert("OnComplete function is called" + status);
+        }
+        function ClearCall() {
+            alert("action method will not be invoked");
+                return false;
+        }
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    @*<title>A synchronous form</title>*@
-    <title>Ajax form</title>
-</head>
-<body>
+        function RowsCount()
+        {
+            alert($("#tableBody tr").length + (" rows counted"));
+        }
+
+    </script>
+
+
     @*<h2>A synchronous form</h2>*@
     <h2 id="ajax_form">Ajax form</h2>
-    <div id="loading" >
+    @*<div id="loading" >
         <p>Loading data....</p>
-    </div>  
+    </div>*@  
     <table>
         <thead><tr><th>First</th><th>Last</th><th>Role</th></tr></thead>
         <tbody id="tableBody">
@@ -57,17 +75,22 @@
             <button type="submit">Submit</button>
         </div>
     }
-
+    @*ajax related to action links only*@
 <div>
     @foreach (string role in Enum.GetNames(typeof(Role)))
     {
     <div class="ajaxLink">
-        @Ajax.ActionLink(role, "GetPeopleData", new { selectedRole = role}, new AjaxOptions { UpdateTargetId = "loading" })
+        @Ajax.ActionLink(role, "GetPeopleData", new { selectedRole = role}, new AjaxOptions 
+        {   
+        UpdateTargetId = "loading",
+        OnBegin = "ClearCall",
+        OnFailure = "OnFailure",
+        OnSuccess = "OnSuccess",
+        OnComplete = "OnComplete"
+        })
     </div>
     }
 </div>
 
-</body>
-</html>
 
 @*<form action="/People/GetPeopleData" data-ajax="true" data-ajax-confirm="Do we proceed?" data-ajax-loading="#ajax_form" data-ajax-loading-duration="5000" data-ajax-mode="replace" data-ajax-update="#tableBody" data-ajax-url="https://thedogsalon.com/" id="form0" method="post">*@
