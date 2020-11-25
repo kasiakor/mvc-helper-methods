@@ -71,7 +71,15 @@ namespace HelperMethods.Controllers
         public JsonResult GetPeopleDataJson(string selectedRole = "All")
         {
             //JsonResult doesn't allow GET
-            IEnumerable<Person> data = GetData(selectedRole);
+            //IEnumerable<Person> data = GetData(selectedRole);
+
+            //select projects each element into new form
+            var data = GetData(selectedRole).Select(p => new
+            {
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                Role = Enum.GetName(typeof(Role), p.Role)
+            });
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
