@@ -12,8 +12,8 @@
         //LoadingElementDuration = 5000,
         //Url ="https://thedogsalon.com/",
         Url = Url.Action("GetPeopleData"),
-        UpdateTargetId = "tableBody",
-        OnSuccess = "RowsCount"
+        //UpdateTargetId = "tableBody",
+        OnSuccess = "processData"
     };
 }
 
@@ -40,6 +40,17 @@
             alert($("#tableBody tr").length + (" rows counted"));
         }
 
+        function processData(data) {
+            var target = $("#tableBody");
+            target.empty();
+            console.log(data);
+            for ( var i = 0; i < data.length; i++)
+            {
+                var person = data[i];
+                console.log(person);
+                target.append("<tr><td>" + person.FirstName + "</td><td>" + person.LastName + "</td><td>" + person.Role + "</td></tr>" );
+            }    
+        }
     </script>
 
 
@@ -66,7 +77,7 @@
     </table>
 
     @*@using (Html.BeginForm())*@
-    @using (Ajax.BeginForm("GetPeopleData", ajaxOptions))
+    @using (Ajax.BeginForm(ajaxOptions))
     {
         <div>
             @Html.DropDownList("selectedRole", new SelectList(
@@ -80,14 +91,14 @@
     @foreach (string role in Enum.GetNames(typeof(Role)))
     {
     <div class="ajaxLink">
-        @Ajax.ActionLink(role, "GetPeopleData", new { selectedRole = role}, new AjaxOptions 
-        {   
-        UpdateTargetId = "loading",
-        OnBegin = "ClearCall",
-        OnFailure = "OnFailure",
-        OnSuccess = "OnSuccess",
-        OnComplete = "OnComplete"
-        })
+        @Ajax.ActionLink(role, "GetPeopleDataJson", new { selectedRole = role}, new AjaxOptions
+   {
+       //UpdateTargetId = "loading",
+       //OnBegin = "ClearCall",
+       //OnFailure = "OnFailure",
+       OnSuccess = "processData"
+       //OnComplete = "OnComplete"
+   })
     </div>
     }
 </div>

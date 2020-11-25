@@ -44,16 +44,47 @@ namespace HelperMethods.Controllers
         //}
 
 
-        public PartialViewResult GetPeopleData(string selectedRole = "All")
+        //public PartialViewResult GetPeopleData(string selectedRole = "All")
+        //{
+        //    IEnumerable<Person> data = personData;
+        //    if(selectedRole != "All")
+        //    {
+        //        Role selected = (Role)Enum.Parse(typeof(Role), selectedRole);
+        //        data = personData.Where(p => p.Role == selected);
+        //    }
+        //    return PartialView(data);
+        //}
+
+        //ajax
+        private IEnumerable<Person > GetData(string selectedRole)
         {
             IEnumerable<Person> data = personData;
-            if(selectedRole != "All")
+            if (selectedRole != "All")
             {
+                //converts the string representation of name or number of enum constant/s to enum object
                 Role selected = (Role)Enum.Parse(typeof(Role), selectedRole);
                 data = personData.Where(p => p.Role == selected);
             }
-            return PartialView(data);
+            return data;
         }
+
+        public JsonResult GetPeopleDataJson(string selectedRole = "All")
+        {
+            //JsonResult doesn't allow GET
+            IEnumerable<Person> data = GetData(selectedRole);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public PartialViewResult GetPeopleData(string selectedRole = "All")
+        {
+            IEnumerable<Person> data = GetData(selectedRole);
+            return PartialView(data);
+
+        }
+
+
+
+
 
         // passes selected value as a string to the view
         public ActionResult GetPeople(string selectedRole = "All")
